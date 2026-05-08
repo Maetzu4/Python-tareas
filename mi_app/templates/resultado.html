@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado del Estudiante</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f7; /* Fondo pastel muy sutil y sobrio */
+            color: #4a4a4a; /* Texto oscuro pero no negro puro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Sombra muy suave */
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #5d6d7e; /* Azul grisáceo sobrio */
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eaeded;
+            padding-bottom: 15px;
+        }
+        p {
+            font-size: 15px;
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .observacion {
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .aprobado {
+            background-color: #eafaf1; /* Verde pastel claro */
+            color: #27ae60;
+        }
+        .reprobado {
+            background-color: #fdedec; /* Rojo/rosa pastel claro */
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado del Estudiante</h1>
+        <p><strong>Nombre:</strong> <span>{{ nombre }}</span></p>
+        <p><strong>Notas:</strong> <span>{{ nota1 }}, {{ nota2 }}, {{ nota3 }}</span></p>
+        <p><strong>Promedio:</strong> <span>{{ promedio }}</span></p>
+        
+        {% if promedio >= 3.0 %}
+            <div class="observacion aprobado">Aprobado</div>
+        {% else %}
+            <div class="observacion reprobado">Reprobado</div>
+        {% endif %}
+    </div>
+</body>
+</html>
