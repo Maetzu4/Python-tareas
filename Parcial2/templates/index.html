@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>Bienvenido al Sistema de Gestión de Urgencias</h2>
+    <p>Utilice el menú de navegación en la parte superior para acceder a las diferentes secciones del sistema. O seleccione una de las opciones rápidas a continuación:</p>
+    
+    <div style="display: flex; gap: 1rem; margin-top: 1.5rem; margin-bottom: 2rem;">
+        <a href="/pacientes" class="btn btn-primary">Ver todos los pacientes</a>
+        <a href="/estadisticas" class="btn btn-primary">Ver estadísticas del sistema</a>
+    </div>
+
+    <h3>Filtrar Pacientes por Prioridad:</h3>
+    <ul style="display: flex; gap: 1rem; margin-top: 1rem;">
+        <li><a href="/prioridad/alta" class="btn" style="background-color: #dc3545; color: white;">Prioridad Alta</a></li>
+        <li><a href="/prioridad/media" class="btn" style="background-color: #ffc107; color: #212529;">Prioridad Media</a></li>
+        <li><a href="/prioridad/baja" class="btn" style="background-color: #28a745; color: white;">Prioridad Baja</a></li>
+    </ul>
+</div>
+{% endblock %}

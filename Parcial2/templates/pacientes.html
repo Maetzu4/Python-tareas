@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Pacientes en Urgencias</h2>
+
+<div class="card">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Prioridad</th>
+                <th>Especialidad</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paciente in pacientes %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if paciente.prioridad == "Alta" %}
+                        <span class="text-red">{{ paciente.nombre }}</span><br>
+                        <small class="text-red">Atención inmediata requerida</small>
+                    {% else %}
+                        {{ paciente.nombre }}
+                    {% endif %}
+                    
+                    {% if paciente.edad > 60 %}
+                        <br><span class="risk-alert">Paciente de riesgo</span>
+                    {% endif %}
+                </td>
+                <td>{{ paciente.edad }}</td>
+                <td>
+                    {% if paciente.prioridad == "Alta" %}
+                        <span class="badge badge-alta">{{ paciente.prioridad }}</span>
+                    {% elif paciente.prioridad == "Media" %}
+                        <span class="badge badge-media">{{ paciente.prioridad }}</span>
+                    {% else %}
+                        <span class="badge badge-baja">{{ paciente.prioridad }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ paciente.especialidad }}</td>
+                <td>
+                    {% if paciente.estado == "Atendido" %}
+                        <span class="text-green">{{ paciente.estado }}</span>
+                    {% else %}
+                        {{ paciente.estado }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% if not pacientes %}
+        <p style="text-align: center; margin-top: 2rem; color: #666;">No existen pacientes.</p>
+    {% endif %}
+</div>
+{% endblock %}

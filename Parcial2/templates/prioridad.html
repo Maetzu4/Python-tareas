@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Pacientes con Prioridad: {{ nivel }}</h2>
+
+<div class="card">
+    {% if pacientes %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Especialidad</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paciente in pacientes %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    {% if paciente.prioridad == "Alta" %}
+                        <span class="text-red">{{ paciente.nombre }}</span><br>
+                        <small class="text-red">Atención inmediata requerida</small>
+                    {% else %}
+                        {{ paciente.nombre }}
+                    {% endif %}
+                    
+                    {% if paciente.edad > 60 %}
+                        <br><span class="risk-alert">Paciente de riesgo</span>
+                    {% endif %}
+                </td>
+                <td>{{ paciente.edad }}</td>
+                <td>{{ paciente.especialidad }}</td>
+                <td>
+                    {% if paciente.estado == "Atendido" %}
+                        <span class="text-green">{{ paciente.estado }}</span>
+                    {% else %}
+                        {{ paciente.estado }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div style="text-align: center; padding: 2rem;">
+            <p style="font-size: 1.1rem; color: #666;">No existen pacientes para esta prioridad</p>
+            <a href="/" class="btn btn-primary" style="margin-top: 1rem;">Volver al inicio</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
