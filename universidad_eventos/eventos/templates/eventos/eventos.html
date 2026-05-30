@@ -1,0 +1,154 @@
+{% extends 'eventos/base.html' %}
+
+{% block title %}Cartelera de Eventos - Universidad Eventos{% endblock %}
+
+{% block content %}
+<div class="row mb-4 align-items-center animate-fade-in">
+    <div class="col-md-7 text-center text-md-start">
+        <h2 class="fw-bold mb-1" style="font-family: 'Outfit', sans-serif;">
+            <i class="fa-solid fa-calendar-days text-primary me-2"></i> Cartelera de Eventos Universitarios
+        </h2>
+        <p class="text-secondary mb-0">Visualiza la agenda de conferencias, talleres y actividades del campus en tiempo real.</p>
+    </div>
+    <div class="col-md-5 text-center text-md-end mt-3 mt-md-0">
+        <a href="{% url 'registrar_evento' %}" class="btn btn-custom-primary">
+            <i class="fa-solid fa-plus me-1"></i> Registrar Nuevo Evento
+        </a>
+    </div>
+</div>
+
+<!-- Buscador y Filtros -->
+<div class="card-custom card p-3 border-0 mb-4 animate-fade-in" style="animation-delay: 0.05s;">
+    <form method="GET" action="{% url 'listar_eventos' %}" class="row g-2 align-items-center">
+        <div class="col-lg-9 col-md-8">
+            <div class="input-group">
+                <span class="input-group-text bg-white border-end-0 text-muted">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" name="q" value="{{ query }}" class="form-control border-start-0 ps-0" placeholder="Buscar eventos por nombre u organizador..." aria-label="Buscar eventos">
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 d-grid gap-2 d-md-flex">
+            <button type="submit" class="btn btn-dark w-100">
+                Filtrar
+            </button>
+            {% if query %}
+                <a href="{% url 'listar_eventos' %}" class="btn btn-outline-secondary w-100">
+                    Limpiar
+                </a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<!-- Listado de Eventos en Tabla o Tarjetas -->
+<div class="card-custom card border-0 p-4 animate-fade-in" style="animation-delay: 0.1s;">
+    {% if query %}
+        <div class="alert alert-light border border-slate-200 py-2 px-3 mb-4 d-flex align-items-center justify-content-between">
+            <span>
+                <i class="fa-solid fa-circle-info text-primary me-2"></i>
+                Resultados para la búsqueda: <strong>"{{ query }}"</strong>
+            </span>
+            <span class="badge bg-secondary">{{ eventos.count }} encontrado(s)</span>
+        </div>
+    {% endif %}
+
+    {% if eventos %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="py-3 px-3 rounded-start-3"><i class="fa-solid fa-tag me-1 text-secondary"></i> Evento</th>
+                        <th scope="col" class="py-3"><i class="fa-solid fa-user-group me-1 text-secondary"></i> Organizador</th>
+                        <th scope="col" class="py-3"><i class="fa-solid fa-clock me-1 text-secondary"></i> Fecha</th>
+                        <th scope="col" class="py-3 text-center"><i class="fa-solid fa-users me-1 text-secondary"></i> Aforo (Cupos / Inscritos)</th>
+                        <th scope="col" class="py-3 text-center"><i class="fa-solid fa-chair me-1 text-secondary"></i> Disponibles</th>
+                        <th scope="col" class="py-3 text-center rounded-end-3"><i class="fa-solid fa-circle-check me-1 text-secondary"></i> Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for evento in eventos %}
+                        <tr>
+                            <!-- Nombre del Evento -->
+                            <td class="py-3 px-3 fw-bold text-dark">
+                                {{ evento.nombre }}
+                            </td>
+                            
+                            <!-- Organizador -->
+                            <td class="py-3 text-secondary">
+                                <span class="badge bg-light text-dark border p-2">{{ evento.organizador }}</span>
+                            </td>
+                            
+                            <!-- Fecha -->
+                            <td class="py-3 text-secondary">
+                                <i class="fa-regular fa-calendar me-1"></i> {{ evento.fecha|date:"d M, Y" }}
+                            </td>
+                            
+                            <!-- Aforo e Inscritos -->
+                            <td class="py-3 text-center">
+                                <div class="fw-semibold">{{ evento.inscritos }} / {{ evento.cupos }}</div>
+                                <div class="progress mt-1" style="height: 6px;">
+                                    <!-- Calcular porcentaje de ocupación -->
+                                    <div class="progress-bar {% if evento.inscritos == evento.cupos %}bg-danger{% elif evento.inscritos >= evento.cupos|add:"-5" %}bg-warning{% else %}bg-primary{% endif %}" 
+                                         role="progressbar" 
+                                         style="width: {% widthratio evento.inscritos evento.cupos 100 %}%" 
+                                         aria-valuenow="{{ evento.inscritos }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="{{ evento.cupos }}">
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <!-- Cupos Disponibles con Condicional ORM -->
+                            <td class="py-3 text-center fw-bold">
+                                {% if evento.inscritos < evento.cupos %}
+                                    <!-- Cupos libres calculados dinámicamente -->
+                                    <span class="text-success">{{ evento.cupos_disponibles }} libres</span>
+                                {% else %}
+                                    <span class="text-danger">0 libres</span>
+                                {% endif %}
+                            </td>
+                            
+                            <!-- Estado de Disponibilidad -->
+                            <td class="py-3 text-center">
+                                {% if evento.inscritos < evento.cupos %}
+                                    <span class="badge bg-success bg-opacity-10 text-success border border-success-subtle px-3 py-2 rounded-pill fw-bold">
+                                        <i class="fa-solid fa-check-circle me-1"></i> Disponible
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-danger bg-opacity-10 text-danger border border-danger-subtle px-3 py-2 rounded-pill fw-bold">
+                                        <i class="fa-solid fa-circle-minus me-1"></i> Agotado
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center py-5">
+            <div class="text-muted mb-3">
+                <i class="fa-solid fa-calendar-xmark display-3 text-secondary opacity-50"></i>
+            </div>
+            <h4 class="fw-bold">No se encontraron eventos</h4>
+            <p class="text-secondary small">
+                {% if query %}
+                    No hay resultados para tu criterio de búsqueda en el campus. Intenta con otra palabra.
+                {% else %}
+                    No se registran eventos creados actualmente en el sistema. ¡Sé el primero en crear uno!
+                {% endif %}
+            </p>
+            {% if query %}
+                <a href="{% url 'listar_eventos' %}" class="btn btn-dark mt-2">
+                    <i class="fa-solid fa-rotate-left me-1"></i> Ver todos los eventos
+                </a>
+            {% else %}
+                <a href="{% url 'registrar_evento' %}" class="btn btn-custom-primary mt-2">
+                    <i class="fa-solid fa-plus me-1"></i> Registrar Evento
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

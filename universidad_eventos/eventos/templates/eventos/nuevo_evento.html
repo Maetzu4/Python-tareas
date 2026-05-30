@@ -1,0 +1,153 @@
+{% extends 'eventos/base.html' %}
+
+{% block title %}Registrar Nuevo Evento - Universidad Eventos{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center my-4 animate-fade-in">
+    <div class="col-lg-8">
+        <!-- Navegación de migas de pan (Breadcrumbs) -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}" class="text-decoration-none">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'listar_eventos' %}" class="text-decoration-none">Eventos</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nuevo Evento</li>
+            </ol>
+        </nav>
+
+        <!-- Tarjeta de Registro con Diseño Moderno -->
+        <div class="card-custom card border-0 p-4">
+            <div class="card-body p-0">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-3 me-3">
+                        <i class="fa-solid fa-calendar-plus fs-3"></i>
+                    </div>
+                    <div>
+                        <h3 class="fw-bold mb-0" style="font-family: 'Outfit', sans-serif;">Formulario de Registro de Eventos</h3>
+                        <p class="text-secondary small mb-0">Completa el formulario para publicar una nueva actividad en el campus universitario.</p>
+                    </div>
+                </div>
+
+                <hr class="text-secondary opacity-25 mb-4">
+
+                <!-- Formulario Django -->
+                <form method="POST" action="{% url 'registrar_evento' %}" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Mostrar errores generales del formulario (si existen) -->
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endif %}
+
+                    <!-- Campo: Nombre del Evento -->
+                    <div class="mb-3">
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label fw-semibold text-slate-800">
+                            <i class="fa-solid fa-heading text-secondary me-1"></i> {{ form.nombre.label }}
+                        </label>
+                        {{ form.nombre }}
+                        {% if form.nombre.help_text %}
+                            <div class="form-text text-muted small">{{ form.nombre.help_text }}</div>
+                        {% endif %}
+                        {% if form.nombre.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.nombre.errors %}
+                                    <i class="fa-solid fa-circle-exclamation me-1"></i> {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Campo: Organizador -->
+                    <div class="mb-3">
+                        <label for="{{ form.organizador.id_for_label }}" class="form-label fw-semibold text-slate-800">
+                            <i class="fa-solid fa-sitemap text-secondary me-1"></i> {{ form.organizador.label }}
+                        </label>
+                        {{ form.organizador }}
+                        {% if form.organizador.help_text %}
+                            <div class="form-text text-muted small">{{ form.organizador.help_text }}</div>
+                        {% endif %}
+                        {% if form.organizador.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.organizador.errors %}
+                                    <i class="fa-solid fa-circle-exclamation me-1"></i> {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <!-- Campo: Fecha del Evento -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.fecha.id_for_label }}" class="form-label fw-semibold text-slate-800">
+                                <i class="fa-regular fa-calendar-days text-secondary me-1"></i> {{ form.fecha.label }}
+                            </label>
+                            {{ form.fecha }}
+                            {% if form.fecha.help_text %}
+                                <div class="form-text text-muted small">{{ form.fecha.help_text }}</div>
+                            {% endif %}
+                            {% if form.fecha.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.fecha.errors %}
+                                        <i class="fa-solid fa-circle-exclamation me-1"></i> {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo: Cupos Totales -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.cupos.id_for_label }}" class="form-label fw-semibold text-slate-800">
+                                <i class="fa-solid fa-users text-secondary me-1"></i> {{ form.cupos.label }}
+                            </label>
+                            {{ form.cupos }}
+                            {% if form.cupos.help_text %}
+                                <div class="form-text text-muted small">{{ form.cupos.help_text }}</div>
+                            {% endif %}
+                            {% if form.cupos.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.cupos.errors %}
+                                        <i class="fa-solid fa-circle-exclamation me-1"></i> {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Campo: Inscritos -->
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.inscritos.id_for_label }}" class="form-label fw-semibold text-slate-800">
+                                <i class="fa-solid fa-user-check text-secondary me-1"></i> {{ form.inscritos.label }}
+                            </label>
+                            {{ form.inscritos }}
+                            {% if form.inscritos.help_text %}
+                                <div class="form-text text-muted small">{{ form.inscritos.help_text }}</div>
+                            {% endif %}
+                            {% if form.inscritos.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.inscritos.errors %}
+                                        <i class="fa-solid fa-circle-exclamation me-1"></i> {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Botones de Acción -->
+                    <div class="d-flex justify-content-end gap-3 mt-4 pt-3 border-top">
+                        <a href="{% url 'listar_eventos' %}" class="btn btn-outline-secondary px-4 py-2 fw-semibold">
+                            Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-custom-primary px-4 py-2">
+                            <i class="fa-solid fa-floppy-disk me-2"></i> Guardar Evento
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

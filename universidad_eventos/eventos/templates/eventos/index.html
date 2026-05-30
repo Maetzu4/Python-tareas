@@ -1,0 +1,123 @@
+{% extends 'eventos/base.html' %}
+
+{% block title %}Inicio - Gestión de Eventos Universitarios{% endblock %}
+
+{% block content %}
+<div class="row align-items-center my-4 animate-fade-in">
+    <!-- Hero Banner Premium -->
+    <div class="col-lg-7 mb-5 mb-lg-0">
+        <div class="pe-lg-4">
+            <span class="badge bg-indigo-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill fs-6 mb-3 fw-semibold">
+                <i class="fa-solid fa-sparkles me-1 text-warning"></i> Plataforma Oficial del Campus
+            </span>
+            <h1 class="display-4 fw-extrabold text-slate-900 mb-3" style="font-family: 'Outfit', sans-serif; font-weight: 800; line-height: 1.1;">
+                Gestiona y Participa en los <span class="text-primary text-gradient" style="background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Eventos Universitarios</span>
+            </h1>
+            <p class="lead text-secondary fs-5 mb-4" style="line-height: 1.6;">
+                Bienvenido al Sistema de Gestión de Eventos Universitarios. Explora conferencias académicas, simposios de investigación, hackathons de innovación y actividades culturales dentro del campus. Regístrate en tus preferidos antes de que se agoten los cupos.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{% url 'listar_eventos' %}" class="btn btn-custom-primary btn-lg shadow-sm">
+                    <i class="fa-solid fa-list-ul me-2"></i> Ver Cartelera de Eventos
+                </a>
+                <a href="{% url 'registrar_evento' %}" class="btn btn-custom-secondary btn-lg bg-white shadow-sm">
+                    <i class="fa-solid fa-calendar-plus me-2"></i> Registrar Nuevo Evento
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hero Imagen / Mockup Ilustrativo -->
+    <div class="col-lg-5">
+        <div class="card-custom p-4 border-0 overflow-hidden position-relative">
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10" style="z-index: 0;"></div>
+            <div class="position-relative" style="z-index: 1;">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-primary text-white p-3 rounded-4 me-3">
+                        <i class="fa-solid fa-circle-nodes fs-3"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-0 fw-bold">Interconexión Total</h4>
+                        <small class="text-muted">Uniendo el campus en un solo lugar</small>
+                    </div>
+                </div>
+                <p class="text-secondary small mb-4">
+                    Nuestra plataforma está diseñada para simplificar el proceso de difusión de actividades estudiantiles e institucionales. Administra el aforo en tiempo real y maximiza el alcance de tus convocatorias.
+                </p>
+                <div class="border-top pt-4">
+                    <div class="d-flex justify-content-between align-items-center text-secondary small">
+                        <span><i class="fa-solid fa-clock me-1"></i> Control de aforo</span>
+                        <span><i class="fa-solid fa-shield-halved me-1"></i> Panel administrativo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sección de Estadísticas con Cards Interactivos -->
+<div class="my-5 animate-fade-in" style="animation-delay: 0.1s;">
+    <h3 class="mb-4 text-center text-lg-start fw-bold" style="font-family: 'Outfit', sans-serif;">
+        <i class="fa-solid fa-chart-pie text-primary me-2"></i> Estadísticas Generales del Campus
+    </h3>
+    <div class="row g-4">
+        <!-- Card: Total Eventos -->
+        <div class="col-md-4">
+            <div class="card-custom card p-4 border-0 h-100 text-center text-md-start">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">
+                    <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-3 mb-3 mb-md-0">
+                        <i class="fa-solid fa-calendar-check fs-2"></i>
+                    </div>
+                    <span class="badge bg-primary px-3 py-2 rounded-pill">Total</span>
+                </div>
+                <h2 class="display-5 fw-extrabold text-dark mb-1">{{ eventos_totales }}</h2>
+                <p class="text-muted fw-medium mb-0">Eventos Registrados</p>
+                <p class="small text-secondary mt-2 mb-0">Catálogo de actividades disponibles en el sistema.</p>
+            </div>
+        </div>
+
+        <!-- Card: Eventos con Cupos -->
+        <div class="col-md-4">
+            <div class="card-custom card p-4 border-0 h-100 text-center text-md-start">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">
+                    <div class="bg-success bg-opacity-10 text-success p-3 rounded-3 mb-3 mb-md-0">
+                        <i class="fa-solid fa-user-plus fs-2"></i>
+                    </div>
+                    <span class="badge bg-success px-3 py-2 rounded-pill">Abiertos</span>
+                </div>
+                <h2 class="display-5 fw-extrabold text-success mb-1">{{ eventos_con_cupos }}</h2>
+                <p class="text-muted fw-medium mb-0">Eventos con Cupo Libre</p>
+                <p class="small text-secondary mt-2 mb-0">Actividades con plazas aún disponibles para inscripción inmediata.</p>
+            </div>
+        </div>
+
+        <!-- Card: Eventos Agotados -->
+        <div class="col-md-4">
+            <div class="card-custom card p-4 border-0 h-100 text-center text-md-start">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-3">
+                    <div class="bg-danger bg-opacity-10 text-danger p-3 rounded-3 mb-3 mb-md-0">
+                        <i class="fa-solid fa-users-slash fs-2"></i>
+                    </div>
+                    <span class="badge bg-danger px-3 py-2 rounded-pill">Agotados</span>
+                </div>
+                <h2 class="display-5 fw-extrabold text-danger mb-1">{{ eventos_agotados }}</h2>
+                <p class="text-muted fw-medium mb-0">Eventos Agotados</p>
+                <p class="small text-secondary mt-2 mb-0">Convocatorias que han alcanzado el aforo máximo permitido.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enlaces rápidos adicionales -->
+<div class="bg-dark text-light p-4 rounded-4 my-5 animate-fade-in" style="animation-delay: 0.2s; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+    <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center gap-4">
+        <div>
+            <h4 class="mb-1 text-white fw-bold"><i class="fa-solid fa-user-shield text-info me-2"></i>¿Eres administrador del sistema?</h4>
+            <p class="mb-0 small text-slate-400">Accede con tu usuario del personal docente o administrativo para aprobar registros y descargar reportes.</p>
+        </div>
+        <a href="/admin/" target="_blank" class="btn btn-outline-info px-4 py-2 fw-semibold">
+            <i class="fa-solid fa-lock me-2"></i> Acceder Panel Administrativo
+        </a>
+    </div>
+</div>
+{% endblock %}

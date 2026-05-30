@@ -1,0 +1,112 @@
+[
+  {
+    "model": "eventos.evento",
+    "pk": 1,
+    "fields": {
+      "nombre": "XVIII Congreso Nacional de Ingeniería de Software",
+      "organizador": "Facultad de Ingeniería",
+      "fecha": "2026-06-15",
+      "cupos": 150,
+      "inscritos": 120
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 2,
+    "fields": {
+      "nombre": "Seminario Internacional: Desafíos del Cambio Climático",
+      "organizador": "Facultad de Ciencias Ambientales",
+      "fecha": "2026-06-28",
+      "cupos": 80,
+      "inscritos": 80
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 3,
+    "fields": {
+      "nombre": "Taller Práctico de Microfinanzas y Emprendimiento",
+      "organizador": "Facultad de Ciencias Económicas",
+      "fecha": "2026-07-05",
+      "cupos": 40,
+      "inscritos": 15
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 4,
+    "fields": {
+      "nombre": "Hackathon Universitaria: Soluciones IoT para el Campus",
+      "organizador": "Semillero de Redes e Internet",
+      "fecha": "2026-07-20",
+      "cupos": 60,
+      "inscritos": 60
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 5,
+    "fields": {
+      "nombre": "Cine-Foro: Impacto Social de la Literatura Latinoamericana",
+      "organizador": "Departamento de Humanidades",
+      "fecha": "2026-08-02",
+      "cupos": 100,
+      "inscritos": 42
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 6,
+    "fields": {
+      "nombre": "Feria de Orientación Vocacional y Posgrados 2026",
+      "organizador": "Oficina de Admisiones y Relaciones Públicas",
+      "fecha": "2026-08-15",
+      "cupos": 300,
+      "inscritos": 185
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 7,
+    "fields": {
+      "nombre": "Simposio de Avances en Nanotecnología Médica",
+      "organizador": "Facultad de Medicina y Ciencias de la Salud",
+      "fecha": "2026-09-10",
+      "cupos": 120,
+      "inscritos": 118
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 8,
+    "fields": {
+      "nombre": "Torneo Interfacultades de Ajedrez Rápido",
+      "organizador": "Coordinación de Deportes y Bienestar",
+      "fecha": "2026-09-22",
+      "cupos": 32,
+      "inscritos": 32
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 9,
+    "fields": {
+      "nombre": "Curso Corto: Introducción a la Programación en Python",
+      "organizador": "Semillero Pythonistas del Campus",
+      "fecha": "2026-10-05",
+      "cupos": 50,
+      "inscritos": 48
+    }
+  },
+  {
+    "model": "eventos.evento",
+    "pk": 10,
+    "fields": {
+      "nombre": "Charla Magistral: Ética en la Era de la Inteligencia Artificial",
+      "organizador": "Facultad de Derecho y Ciencias Políticas",
+      "fecha": "2026-10-18",
+      "cupos": 200,
+      "inscritos": 95
+    }
+  }
+]
