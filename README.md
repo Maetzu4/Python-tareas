@@ -17,6 +17,7 @@
 * [**Capítulo 3: Aplicaciones Web Corporativas con Django (Framework de Alto Nivel)**](#-capítulo-3-aplicaciones-web-corporativas-con-django-framework-de-alto-nivel)
   * [3.1. Núcleo de Gestión Académica (`universidad_project/`)](#31-núcleo-de-gestión-académica-universidad_project)
   * [3.2. Sistema de Gestión de Eventos Universitarios (`universidad_eventos/`)](#32-sistema-de-gestión-de-eventos-universitarios-universidad_eventos)
+  * [3.3. Sistema de Gestión de Préstamos de Equipos Tecnológicos (`laboratorio_ti/`)](#33-sistema-de-gestión-de-préstamos-de-equipos-tecnológicos-laboratorio_ti)
 * [**Capítulo 4: Guía Práctica de Configuración y Puesta en Marcha**](#-capítulo-4-guía-práctica-de-configuración-y-puesta-en-marcha)
   * [4.1. Configuración del Entorno Virtual (.venv)](#41-configuración-del-entorno-virtual-venv)
   * [4.2. Instalación de Dependencias](#42-instalación-de-dependencias)
