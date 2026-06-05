@@ -121,6 +121,36 @@ universidad_eventos/
   * **Buscador Integrado:** Filtrado de eventos dinámico por coincidencia en nombre o facultad organizadora directamente en el frontend.
   * **Control Visual de Plazas:** Visualización de aforo mediante barras de progreso dinámicas y badges de disponibilidad ("Disponible" en verde si quedan cupos o "Agotado" en rojo si el aforo está al 100%).
 
+### 3.3. Sistema de Gestión de Préstamos de Equipos Tecnológicos (`laboratorio_ti/`)
+* **Ubicación:** `laboratorio_ti/`
+* **Descripción:** Aplicación web empresarial modular orientada al control interno de activos de TI y su flujo de asignación o devolución mediante el patrón MVT.
+* **Estructura del Proyecto:**
+```text
+laboratorio_ti/
+├── manage.py
+├── laboratorio_ti/
+│   ├── settings.py           <-- Localización en español y configuración de mensajes
+│   └── urls.py               <-- Enrutador principal de Django
+└── prestamos/
+    ├── models.py             <-- Modelo Equipo (nombre, categoría, responsable, disponibilidad)
+    ├── forms.py              <-- ModelForm adaptado con clases y estilos Bootstrap 5
+    ├── views.py              <-- Controladores de listado, registro y cambio de estado
+    ├── urls.py               <-- Endpoints internos del sistema
+    └── templates/
+        └── prestamos/
+            ├── base.html     <-- Estructura, navbar responsive y sistema de alertas
+            ├── registrar_equipo.html <-- Formulario estructurado
+            ├── equipos.html  <-- Dashboard de equipos con widgets de estadísticas
+            ├── disponibles.html <-- Listado filtrado (Disponible = True)
+            └── prestados.html   <-- Listado filtrado (Disponible = False)
+```
+* **Características Clave:**
+  * **Dashboard de Métricas Integradas:** Tarjetas de resumen en la parte superior que muestran en tiempo real el total de equipos en inventario, cuántos están disponibles y cuántos están en préstamo.
+  * **Gestión Atómica de Préstamos:** Cambios de estado directos ("Disponible" <-> "Prestado") a través de botones interactivos con un solo clic que actualizan la base de datos de manera inmediata.
+  * **Widgets Estilizados en Formulario:** `EquipoForm` implementa widgets de HTML5 (como `type="date"` y selectores de switch) acoplados a Bootstrap 5 para garantizar una entrada limpia de datos.
+  * **Herencia y DRY de Plantillas:** Uso de la herencia de Django (`{% extends %}`) para que las vistas filtradas compartan el mismo diseño del listado general, evitando la duplicación de código HTML.
+  * **Sistema de Mensajes Dinámicos:** Integración de `django.contrib.messages` mapeado con alertas de Bootstrap (Success, Danger, Warning) para confirmaciones inmediatas ante acciones del usuario.
+
 ---
 
 ## 🚀 Capítulo 4: Guía Práctica de Configuración y Puesta en Marcha
