@@ -201,6 +201,29 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+### 4.4. Puesta en Marcha del Sistema de Gestión de Préstamos (`laboratorio_ti/`)
+
+Para ejecutar la aplicación de gestión de préstamos de equipos, una vez activado el entorno virtual (`.venv`) e instaladas las dependencias, realiza lo siguiente:
+
+```bash
+# 1. Ubícate en la carpeta del proyecto
+cd laboratorio_ti
+
+# 2. Generar las migraciones (si deseas reconstruirlas o actualizarlas)
+python manage.py makemigrations prestamos
+
+# 3. Aplicar las migraciones en la base de datos SQLite
+python manage.py migrate
+
+# 4. Crear una cuenta de administrador para acceder a /admin/
+python manage.py createsuperuser
+
+# 5. Encender el servidor de desarrollo de Django
+python manage.py runserver
+```
+
+Una vez activo el servidor, accede a [http://127.0.0.1:8000/](http://127.0.0.1:8000/) en tu navegador.
+
 ---
 
 ## 🎨 Epílogo: Criterios de Calidad y Buenas Prácticas
