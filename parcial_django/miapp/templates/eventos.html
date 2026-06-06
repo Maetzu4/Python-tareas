@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Eventos</title>
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .alerta { color: red; font-weight: bold; }
+        .abierto { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    {% include 'header.html' %}
+
+    <main style="padding: 20px;">
+        <h2>{{ nombre_sistema }}</h2>
+        <p><strong>Fecha actual:</strong> {{ fecha_actual|date:"d/m/Y H:i" }}</p>
+        
+        <hr>
+
+        <h3>Tabla de Eventos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Evento</th>
+                    <th>Fecha</th>
+                    <th>Lugar</th>
+                    <th>Conferencista</th>
+                    <th>Cupos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventos %}
+                <tr>
+                    <td>{{ evento.nombre_evento }}</td>
+                    <td>{{ evento.fecha|date:"d/m/Y" }}</td>
+                    <td>{{ evento.lugar }}</td>
+                    <td>{{ evento.conferencista.nombre_completo }}</td>
+                    <td>{{ evento.cupos_disponibles }}</td>
+                    <td>
+                        {% if evento.cupos_disponibles < 5 %}
+                            <span class="alerta">Últimos cupos disponibles</span>
+                        {% else %}
+                            <span class="abierto">Inscripciones abiertas</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No hay eventos académicos registrados actualmente.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    {% include 'footer.html' %}
+
+</body>
+</html>
